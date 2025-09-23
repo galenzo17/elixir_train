@@ -21,13 +21,20 @@ defmodule ElixirTrain.Application do
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: ElixirTrain.Supervisor]
+
+    # Llamar say_hello DESPUÉS de definir opts pero ANTES del Supervisor
+    say_hello()
+
     Supervisor.start_link(children, opts)
   end
 
+  def say_hello do
+    IO.puts "Hello"
+  end
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   @impl true
-  def config_change(changed, _new, removed) do
+  def config_change(_changed, _new, _removed) do
     # ElixirTrainWeb.Endpoint.config_change(changed, removed)
     :ok
   end
