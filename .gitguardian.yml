@@ -1,0 +1,15 @@
+# GitGuardian configuration
+version: 2
+
+secret_scanning:
+  # Exclude test and development configuration files
+  ignored_paths:
+    - config/dev.exs
+    - config/test.exs
+    - .env.example
+    - docker-compose.yml
+
+  # These are development-only values
+  ignored_matches:
+    - name: dev_postgres_credentials
+      match: 'postgres'
