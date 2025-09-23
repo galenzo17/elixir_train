@@ -1,6 +1,20 @@
 defmodule ElixirTrain.MixProject do
   use Mix.Project
 
+  @doc """
+  Returns the Mix project configuration keyword list for the ElixirTrain application.
+  
+  The returned list contains compile and runtime settings used by Mix and releases:
+  - `:app`, `:version`, and `:elixir` specify basic project metadata.
+  - `:elixirc_paths` is environment-aware (delegates to `elixirc_paths/1`).
+  - `:start_permanent` is enabled when `Mix.env() == :prod`.
+  - `:deps` and `:aliases` reference the local `deps/0` and `aliases/0` helpers.
+  - `:test_coverage` is configured to use ExCoveralls.
+  - `:preferred_cli_env` maps coveralls-related tasks to the `:test` environment.
+  
+  This function is used by Mix when compiling, running, and releasing the project.
+  """
+  @spec project() :: keyword()
   def project do
     [
       app: :elixir_train,
@@ -21,6 +35,14 @@ defmodule ElixirTrain.MixProject do
   end
 
   # Run "mix help compile.app" to learn about applications.
+  @doc """
+  Returns the OTP application configuration for the project.
+  
+  The returned keyword list is used by Mix to configure application startup:
+  - `mod`: the application callback module and its start arguments (`{ElixirTrain.Application, []}`).
+  - `extra_applications`: additional Erlang/Elixir applications to start before this app (`[:logger]`).
+  """
+  @spec application() :: keyword()
   def application do
     [
       mod: {ElixirTrain.Application, []},
