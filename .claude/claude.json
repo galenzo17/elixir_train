@@ -1,0 +1,16 @@
+{
+  "context": {
+    "includeFiles": [
+      "CONTEXT.md",
+      "lib/CONTEXT.md",
+      "docs/CONTEXT.md",
+      "test/CONTEXT.md"
+    ],
+    "autoRead": true
+  },
+  "project": {
+    "name": "Elixir Train Interview",
+    "type": "elixir-phoenix",
+    "version": "1.0.0"
+  }
+}
