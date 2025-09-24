@@ -1,29 +1,16 @@
 import Config
 
-# Configure your database
 config :elixir_train, ElixirTrain.Repo,
-  username: System.get_env("DB_USERNAME", "postgres"),
-  password: System.get_env("DB_PASSWORD", "postgres"),
-  hostname: System.get_env("DB_HOSTNAME", "localhost"),
-  database: System.get_env("DB_NAME", "elixir_train_dev"),
-  show_sensitive_data_on_connection_error: true,
-  pool_size: 10
+  database: ":memory:",
+  pool_size: 10,
+  show_sensitive_data_on_connection_error: true
 
-# For development, we disable any cache and enable
-# debugging and code reloading.
 config :elixir_train, ElixirTrainWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
-  check_origin: false,
-  watchers: []
+  check_origin: false
 
-# Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
-
-# Set a higher stacktrace during development. Avoid configuring such
-# in production as building large stacktraces may be expensive.
 config :phoenix, :stacktrace_depth, 20
-
-# Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime

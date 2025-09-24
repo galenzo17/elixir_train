@@ -6,40 +6,18 @@ defmodule ElixirTrain.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      # Start the Ecto repository
-      # ElixirTrain.Repo,
-      # Start the Telemetry supervisor
-      # ElixirTrainWeb.Telemetry,
-      # Start the PubSub system
+      ElixirTrain.Repo,
       {Phoenix.PubSub, name: ElixirTrain.PubSub},
-      # Start the Endpoint (http/https)
-      # ElixirTrainWeb.Endpoint,
-      # Start Oban for background jobs
-      # {Oban, oban_config()}
+      ElixirTrainWeb.Endpoint
     ]
 
-    # See https://hexdocs.pm/elixir/Supervisor.html
-    # for other strategies and supported options
     opts = [strategy: :one_for_one, name: ElixirTrain.Supervisor]
-
-    # Llamar say_hello DESPUÉS de definir opts pero ANTES del Supervisor
-    say_hello()
-
     Supervisor.start_link(children, opts)
   end
 
-  def say_hello do
-    IO.puts "Hello"
-  end
-  # Tell Phoenix to update the endpoint configuration
-  # whenever the application is updated.
   @impl true
-  def config_change(_changed, _new, _removed) do
-    # ElixirTrainWeb.Endpoint.config_change(changed, removed)
+  def config_change(changed, _new, removed) do
+    ElixirTrainWeb.Endpoint.config_change(changed, removed)
     :ok
-  end
-
-  defp oban_config do
-    Application.fetch_env!(:elixir_train, Oban)
   end
 end
